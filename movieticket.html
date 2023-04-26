@@ -1,0 +1,150 @@
+<script>
+    function total() {
+        var days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+        var d = new Date(dat.value);
+        var dayName = days[d.getDay()];
+
+        var t = tickets.value
+        if (t >= 5 || dayName == 'Sunday' || dayName == 'Saturday') {
+            var tot = t * 90
+        }
+        else {
+            var tot = t * 100
+        }
+        tp.innerHTML = tot
+    }
+
+    function filldd() {
+        var movies = ['-select movie-', 'Waltair Veeraiya', 'Drishyam 2', 'Varishu', 'Veera Simha Reddy', 'K.G.F']
+        for (i = 0; i < movies.length; i++) {
+            var opt = document.createElement('option')
+            opt.text = movies[i]
+            movie.add(opt)
+
+        }
+
+        var the = ['-select theater-', 'INOX', 'DB MALL', 'GOLD CINEMA', 'FUN CINEMA', 'CINPLEX']
+        for (i = 0; i < movies.length; i++) {
+            var opt = document.createElement('option')
+            opt.text = the[i]
+            theater.add(opt)
+        }
+
+    }
+    function printTicket() {
+        var days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+        var d = new Date(dat.value);
+        var dayName = days[d.getDay()];
+        var date = (d.getDate()) + " " + (d.getMonth() + 1) + " " + (d.getFullYear())
+        var i = movie.selectedIndex
+        var j = theater.selectedIndex
+        var t = tickets.value
+        if (t > 5 || dayName == 'Sunday' || dayName == 'Saturday') {
+            var tot = t * 90
+        }
+        else {
+            var tot = t * 100
+        }
+
+        //   if (t>=20)
+        //   {
+        //     var
+        //   }
+        var msg = `<table  class='tick'><tr><td><img src='${movie.options[i].text}.png' width=250px height=250px class="bd"></td><td><img src='${theater.options[j].text}.png' width=250px height=250px class="bd"></td><th>Movie : ${movie.options[i].text}<br>DATE : ${date}<br>Tickets : ${tickets.value}<br>Price : ${tot}<br>Email : ${email.value}</th><th><img src='QR.png' width=200px height=200px class="bd"><br>SCAN & PAY </th></tr></table>`
+        result.innerHTML = msg
+    }
+</script>
+<html>
+<style>
+    .bdy{
+           background-image: url("t.png");
+           background-size: cover;
+
+        }
+
+    .tbl {
+        background-color: brown;
+        color: yellow;
+        border-radius: 15px;
+    }
+
+    .btnn {
+        border-radius: 20px;
+        background-color: aqua;
+        color: black;
+        font-weight: bolder;
+        cursor: pointer;
+    }
+
+    .btnn:hover {
+        background-color: black;
+        color: aliceblue;
+        font-weight: bolder;
+    }
+
+    .tick {
+        background-color: burlywood;
+        color: black;
+        font-size: larger;
+        font-weight: bolder;
+        font-style: italic;
+        border-radius: 35px;
+
+
+    }
+
+    .bd {
+        border-radius: 20px;
+    }
+
+    .bar {
+        background-color: black;
+        color: aqua;
+    }
+</style>
+
+<body class="bdy" onload="filldd()"  > </body>
+<center>
+    <table class="tbl">
+        <caption>BOOKING DETAILS</caption>
+        <tr>
+            <td>MOVIE</td>
+            <td> <select id="movie" class="bar"></select></td>
+        </tr>
+        <tr>
+            <td>THEATERS </td>
+            <td><select id="theater" class="bar"></select></td>
+        </tr>
+        <tr>
+            <td>DATE </td>
+            <td><input type="date" id="dat" class="bar"></td>
+        </tr>
+        <tr>
+            <td>EMAIL</td>
+            <td>
+                <input type="text" id="email" class="bar">
+            </td>
+        </tr>
+        <tr>
+            <td>NO.OF TICKETS</td>
+            <td><input type="text" id="tickets" onkeyup="total()" class="bar"></td>
+        </tr>
+        <tr>
+            <td>TOTAL PRICE</td>
+            <td> <span id="tp">(fill the above data...)</span></td>
+        </tr>
+        <tr>
+            <td></td>
+        </tr>
+        <tr>
+            <td>10% Discount on WEEKENDS and <br> booking more than 5 tickets </td>
+        </tr>
+    </table> <br>
+    <input type="button" value="BOOK TICKETS" class="btnn" onclick="printTicket()">
+    <br><br><br><br>
+    <div id="result"></div>
+
+</center>
+</body>
+
+</html>
